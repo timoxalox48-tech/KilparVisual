@@ -1,3 +1,4 @@
+
 name: Build Kilpar Visual
 
 on:
@@ -21,7 +22,9 @@ jobs:
           gradle-version: '9.2.1'
 
       - name: Extract source
-        run: unzip -q KilparVisual-1.21.11-source.zip
+        run: |
+          unzip -q KilparVisual-1.21.11-source.zip
+          sed -i 's/RepositoriesMode.FAIL_ON_PROJECT_REPOS/RepositoriesMode.PREFER_PROJECT/' KilparVisual-1.21.11/settings.gradle
 
       - name: Build mod
         run: cd KilparVisual-1.21.11 && gradle build
